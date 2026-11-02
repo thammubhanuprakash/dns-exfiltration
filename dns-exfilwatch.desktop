@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DNS-ExfilWatch
+GenericName=DNS Tunneling Detection & Active Defense
+Comment=Real-Time DNS Exfiltration Intrusion Detection & iptables Quarantine
+Exec=x-terminal-emulator -e "bash -c 'sudo /usr/local/bin/dns-exfilwatch -i any --auto-block; bash'"
+Icon=dns-exfilwatch
+Terminal=false
+Categories=08-sniffing-spoofing;Security;Network;System;
+Keywords=dns;exfil;tunnel;exfiltration;firewall;iptables;sniff;watch;security;defense;
+StartupNotify=true

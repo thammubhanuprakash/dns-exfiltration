@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="alertRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Protective Shield -->
+  <path d="M128 16 L220 54 C220 156 128 238 128 238 C128 238 36 156 36 54 Z"
+        fill="url(#shieldGrad)" stroke="url(#neonCyan)" stroke-width="8" stroke-linejoin="round" />
+
+  <!-- Inner Defense Circuit Pattern -->
+  <path d="M128 42 L198 72 C198 150 128 214 128 214 C128 214 58 150 58 72 Z"
+        fill="none" stroke="#1e293b" stroke-width="4" stroke-dasharray="6,4" />
+
+  <!-- Radar / DNS Network Ring 1 -->
+  <circle cx="128" cy="120" r="54" fill="none" stroke="#0ea5e9" stroke-width="3" opacity="0.4" />
+  
+  <!-- Radar / DNS Network Ring 2 -->
+  <circle cx="128" cy="120" r="34" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.7" />
+
+  <!-- Core DNS Server Node -->
+  <circle cx="128" cy="120" r="14" fill="url(#neonCyan)" filter="url(#glow)" />
+
+  <!-- Connected Subdomain Nodes -->
+  <!-- Top Node -->
+  <line x1="128" y1="120" x2="128" y2="76" stroke="#38bdf8" stroke-width="3" />
+  <circle cx="128" cy="76" r="7" fill="#38bdf8" />
+
+  <!-- Bottom Left Node -->
+  <line x1="128" y1="120" x2="84" y2="152" stroke="#38bdf8" stroke-width="3" />
+  <circle cx="84" cy="152" r="7" fill="#38bdf8" />
+
+  <!-- Bottom Right Node (Exfiltration Detected - Alert Red) -->
+  <line x1="128" y1="120" x2="172" y2="152" stroke="#ef4444" stroke-width="4" stroke-dasharray="4,2" />
+  <circle cx="172" cy="152" r="9" fill="url(#alertRed)" filter="url(#glow)" />
+
+  <!-- Firewall Blocking Barrier -->
+  <line x1="158" y1="140" x2="186" y2="164" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+  <line x1="186" y1="140" x2="158" y2="164" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+</svg>

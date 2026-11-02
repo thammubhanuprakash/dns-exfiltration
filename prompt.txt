@@ -1,0 +1,39 @@
+Act as a Senior Cyber Security Engineer and Systems Software Developer specializing in Linux network defense and Python development.
+
+I need you to generate the complete source code for a modular, from-scratch cybersecurity tool called "DNS-ExfilWatch". The tool will be developed and executed natively on Kali Linux.
+
+### Problem Context:
+Attackers frequently use DNS tunneling to covertly exfiltrate stolen files or establish slow C2 channels by embedding encoded/encrypted payloads inside DNS subdomain lookups. Standard firewalls allow port 53 traffic, leaving this undetected. This tool must monitor live DNS traffic in real time, score domain queries using statistical metrics, raise security alerts, and execute automated firewall quarantines via Linux iptables.
+
+### Core Architecture & Technical Requirements:
+1. Technology Stack:
+   - Python 3
+   - Scapy (for promiscuous packet capture and protocol parsing on UDP port 53)
+   - Rich (for a beautiful, live-updating terminal CLI dashboard)
+   - Subprocess & OS (for automated iptables manipulation)
+   - SQLite3 or JSON (for persistent threat logging)
+
+2. Mathematical & Algorithmic Detection Engine:
+   - Shannon Entropy Calculation: Compute the exact entropy of incoming domain labels using H(X) = -sum(P(x) * log2(P(x))). Flag queries where entropy exceeds a configurable threshold (e.g., > 3.8), indicating base64, hex, or encrypted payloads.
+   - Subdomain Length & Depth Analysis: Detect oversized labels (e.g., individual labels > 35 characters or total domain length > 60 characters).
+   - Frequency & Record Type Anomalies: Track rapid queries from single IP addresses requesting non-standard exfiltration record types (TXT, NULL, CNAME).
+   - Weighted Scoring Model: Aggregate entropy, length, and frequency into a composite Risk Score (0 to 100). If Risk Score >= 75, classify as High-Severity DNS Exfiltration.
+
+3. Kali Linux Active Defense (Quarantine):
+   - When an IP breaches the threat threshold and the `--auto-block` flag is active, automatically invoke `iptables` to block inbound traffic from the malicious source IP.
+   - Include a graceful cleanup handler (SIGINT / Ctrl+C) to optionally list or flush rules added during the session.
+
+4. User Interface:
+   - Built using Python's `rich` library.
+   - Include a live summary table showing: Timestamp, Source IP, Queried Domain, Record Type, Entropy Score, Risk Level (Normal/Warning/Exfiltration), and Action Taken (Logged/Blocked).
+   - Include a statistics panel showing: Total Packets Inspected, Malicious Packets Flagged, and Total IPs Quarantined.
+
+### File Structure Needed:
+Please organize the output into a clean, modular multi-file directory structure with production-grade Python code:
+1. `analyzer.py`: Contains Shannon entropy algorithms, length scoring, and domain extraction logic.
+2. `firewall.py`: Handles safe execution of iptables rules, validation, and session cleanup.
+3. `sniffer.py`: Contains the Scapy packet callback, queueing, and integration with the analyzer.
+4. `main.py`: CLI entry point using `argparse` (arguments for interface `-i`, entropy threshold `-e`, length threshold `-l`, and `--auto-block`), initializing the Rich dashboard and signal handling.
+5. `simulate_attack.sh`: A bash script using `dig` or `nslookup` that simulates an exfiltration attack (reading a local string, base64 encoding it, and issuing chunked DNS queries) to verify that the tool detects it during a live viva/demo.
+
+Provide the full code for every file without truncating, along with step-by-step setup commands for Kali Linux.

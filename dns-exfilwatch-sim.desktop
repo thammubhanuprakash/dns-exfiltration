@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DNS-ExfilWatch Attack Simulator
+GenericName=DNS Tunneling Attack Simulator
+Comment=Simulates chunked Base64 DNS exfiltration queries for testing and viva demos
+Exec=x-terminal-emulator -e "bash -c '/usr/local/bin/dns-exfilwatch-sim -m all; bash'"
+Icon=dns-exfilwatch
+Terminal=false
+Categories=08-sniffing-spoofing;Security;Network;System;
+Keywords=dns;attack;simulator;exfil;tunnel;viva;demo;
+StartupNotify=true
